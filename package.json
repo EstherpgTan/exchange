@@ -1,0 +1,9 @@
+{
+  "name": "exchange-v3-contracts",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.26.3"
+  }
+}
