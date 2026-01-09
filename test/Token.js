@@ -40,15 +40,12 @@ describe("Token", () => {
             const { token, deployer } = await loadFixture(deployTokenFixture)
             expect(await token.balanceOf(deployer.address)).to.equal(TOTAL_SUPPLY)
         })
-
     })
 
-    describe("Success", () => {
-
+    describe("Sending Tokens", () => {
         const AMOUNT = tokens(100)
 
-        describe("Sending Tokens", () => {
-
+        describe("Success", () => {
             it("transfers token balances", async () => {
                 const { token, deployer, receiver } = await loadFixture(deployTokenFixture)
 
@@ -66,10 +63,9 @@ describe("Token", () => {
                 await transaction.wait()
 
                 await expect(transaction).to.emit(token, "Transfer").withArgs(deployer.address, receiver.address, AMOUNT)
-
             })
-
         })
+
         describe("Failure", () => {
             it("rejects insufficient balances", async () => {
                 const { token, deployer, receiver } = await loadFixture(deployTokenFixture)
@@ -78,7 +74,6 @@ describe("Token", () => {
                 const ERROR = "Token: Insufficient Funds"
 
                 await expect(token.connect(deployer).transfer(receiver.address, INVALID_AMOUNT)).to.be.revertedWith(ERROR)
-
             })
 
             describe("Approving Tokens", () => {
@@ -101,7 +96,6 @@ describe("Token", () => {
 
                         await expect(transaction).to.emit(token, "Approval").withArgs(deployer.address, exchange.address, AMOUNT)
                     })
-
                 })
 
                 describe("Failure", () => {
@@ -143,6 +137,7 @@ describe("Token", () => {
                                 await (await token.connect(deployer).approve(exchange.address, INVALID_AMOUNT)).wait()
                                 await expect(token.connect(exchange).transferFrom(deployer.address, receiver.address, INVALID_AMOUNT)).to.be.revertedWith(ERROR)
                             })
+
                             it("Rejects insufficient allowance", async () => {
                                 const { token, deployer, receiver, exchange } = await loadFixture(deployTokenFixture)
 
@@ -155,9 +150,7 @@ describe("Token", () => {
                                     .to.be.revertedWith(ERROR)
 
                             })
-
                         })
-
                     })
                 })
             })
