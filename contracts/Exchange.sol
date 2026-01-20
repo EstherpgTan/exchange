@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.28;
 import {Token} from "./Token.sol";
-contract Exchange {
+import {FlashLoanProvider} from "./FlashLoanProvider.sol";
+contract Exchange is FlashLoanProvider {
     // State variables
     address public feeAccount;
     uint256 public feePercent;
